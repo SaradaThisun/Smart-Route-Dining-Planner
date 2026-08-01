@@ -1,0 +1,19 @@
+LatLng currentLocation =
+        new LatLng(
+        currentLatitude,
+        currentLongitude);
+
+
+googleMap.addMarker(
+        new MarkerOptions()
+        .position(currentLocation)
+        .title("Your Location")
+);
+
+
+googleMap.moveCamera(
+        CameraUpdateFactory
+        .newLatLngZoom(
+        currentLocation,
+        15)
+);
