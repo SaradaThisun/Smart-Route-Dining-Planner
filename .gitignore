@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Expo & Build outputs
+.expo/
+**/expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native builds
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+/ios/
+/android/
+
+# System / Logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# Environment
+.env
+.env*.local
+
+# Typescript
+*.tsbuildinfo
