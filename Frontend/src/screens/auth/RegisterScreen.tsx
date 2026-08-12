@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -68,13 +70,20 @@ if (password.length < 6) {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
       <View style={styles.header}>
         <Text style={styles.logo}>
-          Travel<Text style={styles.logo2}>Pal</Text>
+          Travel<Text style={styles.logo2}>Taste</Text>
         </Text>
       </View>
 
@@ -90,6 +99,7 @@ if (password.length < 6) {
         <TextInput
           style={styles.input}
           placeholder="Full Name"
+          placeholderTextColor="#050505"
           value={fullName}
           onChangeText={setFullName}
         />
@@ -97,6 +107,7 @@ if (password.length < 6) {
         <TextInput
           style={styles.input}
           placeholder="Email Address"
+          placeholderTextColor="#050505"
           keyboardType="email-address"
           autoCapitalize="none"
           value={email}
@@ -106,6 +117,7 @@ if (password.length < 6) {
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
+          placeholderTextColor="#050505"
           keyboardType="phone-pad"
           value={phone}
           onChangeText={setPhone}
@@ -114,6 +126,7 @@ if (password.length < 6) {
         <TextInput
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#050505"
           secureTextEntry
           value={password}
           onChangeText={setPassword}
@@ -122,6 +135,7 @@ if (password.length < 6) {
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
+          placeholderTextColor="#050505"
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -142,7 +156,9 @@ if (password.length < 6) {
           </TouchableOpacity>
         </View>
       </View>
-    </KeyboardAvoidingView>
+      </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
