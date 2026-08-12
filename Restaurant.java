@@ -1,24 +1,14 @@
-/**
- * Restaurant.java
- * -----------------------------------------------------------
- * Represents a single restaurant candidate found along the
- * user's travel route. Holds the raw attributes (rating,
- * distance from route, price, availability, facilities) plus
- * a computed "overallScore" that the Priority Queue uses to
- * rank restaurants against each other.
- * -----------------------------------------------------------
- */
 public class Restaurant {
 
     private String name;
     private String cuisineType;
-    private double rating;              // 0.0 - 5.0 (from reviews)
-    private double distanceFromRoute;   // in kilometers, off the planned route
-    private int priceLevel;             // 1 (cheap) - 4 (expensive)
+    private double rating;              
+    private double distanceFromRoute;   
+    private int priceLevel;             
     private boolean isOpenNow;
     private boolean hasParking;
     private boolean isFamilyFriendly;
-    private double overallScore;        // computed ranking score
+    private double overallScore;        
 
     public Restaurant(String name, String cuisineType, double rating,
                        double distanceFromRoute, int priceLevel,
@@ -34,19 +24,13 @@ public class Restaurant {
         this.overallScore = calculateScore();
     }
 
-    /**
-     * Scoring formula combining the factors mentioned in the report:
-     * higher rating, shorter distance from route, lower price, and
-     * availability all push a restaurant higher up the ranking.
-     *
-     * Weights can be tuned later without changing the Priority Queue logic.
-     */
+    
     private double calculateScore() {
         double score = 0.0;
-        score += rating * 20;                 // rating contributes most (0-100)
-        score -= distanceFromRoute * 5;        // farther from route = lower score
-        score -= priceLevel * 3;               // pricier = slightly lower score
-        score += isOpenNow ? 10 : -50;          // closed restaurants are pushed down hard
+        score += rating * 20;                 
+        score -= distanceFromRoute * 5;        
+        score -= priceLevel * 3;               
+        score += isOpenNow ? 10 : -50;          
         score += hasParking ? 5 : 0;
         score += isFamilyFriendly ? 5 : 0;
         return score;
