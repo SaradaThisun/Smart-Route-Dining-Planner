@@ -76,10 +76,6 @@ public class RouteActivity extends AppCompatActivity {
             "Destination : "+end);
 
 
-
-            // Send data to Google Directions API here
-
-
         });
 
 
