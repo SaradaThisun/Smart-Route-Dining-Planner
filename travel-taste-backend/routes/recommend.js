@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const { validateRecommendRequest } = require('../middleware/validateRequest');
 const restaurants = require('../data/restaurants.json');
 const { buildGridIndex, getNearbyRestaurants } = require('../utils/gridIndex');
 const {
@@ -14,7 +15,7 @@ const { rankRestaurants } = require('../utils/rankUtils');
 
 const restaurantGrid = buildGridIndex(restaurants);
 
-router.post('/', (req, res) => {
+router.post('/', validateRecommendRequest, (req, res) => {
   try {
     const { routeCoords, preferences } = req.body;
 
