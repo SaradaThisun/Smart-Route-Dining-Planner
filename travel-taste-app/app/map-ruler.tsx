@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
@@ -18,6 +19,15 @@ const STOPS = [
   { id: 4, name: 'Nine Arches Tea Kade', km: 56, isStop: true, icon: 'cafe' },
   { id: 5, name: 'Finish', km: 78, isStop: false },
 ];
+
+const STATIC_MAP_URL =
+  'https://maps.geoapify.com/v1/staticmap?' +
+  'style=osm-carto&width=600&height=500' +
+  '&center=lonlat:81.0,6.88&zoom=10' +
+  '&geometry=polyline:80.7891,6.9497,81.0463,6.8290,81.0466,6.8667;linecolor:%23154212;linewidth:4' +
+  '&marker=lonlat:81.0466,6.8667;color:%23ff8c00;size:large|lonlat:81.0463,6.8290;color:%23ff8c00;size:large' +
+  '&apiKey=ccb11eb089a34c0fa0cb561446a7b904';
+
 
 const TOTAL_DISTANCE = 78;
 const SAMPLE_RESTAURANT = {
@@ -57,11 +67,12 @@ export default function MapRulerScreen() {
         <View style={styles.avatar} />
       </View>
 
-      <View style={styles.mapSection}>
-        <View style={styles.mapPlaceholder}>
-          <Ionicons name="map-outline" size={48} color="#C2C9BB" />
-          <Text style={styles.mapPlaceholderText}>Map coming soon</Text>
-        </View>
+<View style={styles.mapSection}>
+        <Image
+          source={{ uri: STATIC_MAP_URL }}
+          style={styles.map}
+          resizeMode="cover"
+        />
 
         <TouchableOpacity style={styles.filterFab} onPress={() => setFilterVisible(true)}>
           <Ionicons name="filter" size={20} color="#FFFFFF" />
@@ -82,6 +93,7 @@ export default function MapRulerScreen() {
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.rulerScroll}>
+
           <View style={styles.rulerTrack}>
             <View style={styles.rulerLine} />
             <View
@@ -110,6 +122,7 @@ export default function MapRulerScreen() {
                   </Text>
                 </View>
               ))}
+              
             </View>
           </View>
         </ScrollView>
@@ -143,13 +156,13 @@ export default function MapRulerScreen() {
           <Ionicons name="heart-outline" size={22} color="#72796E" />
           <Text style={styles.navLabel}>Saved</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}onPress={() => router.push('/profile' as any)}>
+        <TouchableOpacity style={styles.navItem} onPress={() => router.push('/profile' as any)}>
           <Ionicons name="person-outline" size={22} color="#72796E" />
           <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
       </View>
 
-     <RestaurantDetailSheet
+      <RestaurantDetailSheet
         visible={sheetVisible}
         onClose={() => setSheetVisible(false)}
         restaurant={SAMPLE_RESTAURANT}
@@ -186,17 +199,7 @@ const styles = StyleSheet.create({
     borderColor: '#BCF0AE',
   },
   mapSection: { flex: 6, position: 'relative' },
-  mapPlaceholder: {
-    flex: 1,
-    backgroundColor: '#EDF4FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-  },
-  mapPlaceholderText: {
-    color: '#72796E',
-    fontSize: 14,
-  },
+  map: { flex: 1, width: '100%', height: '100%' },
   filterFab: {
     position: 'absolute',
     top: 16,
