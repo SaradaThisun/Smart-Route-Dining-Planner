@@ -8,6 +8,7 @@ require('dotenv').config();
 const recommendRoute = require('./routes/recommend');
 const restaurantsRoute = require('./routes/restaurants');
 const searchRoute = require('./routes/search');
+const optimizeStopsRoute = require('./routes/optimizeStops');
 const requestLogger = require('./middleware/requestLogger');
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/recommend', recommendRoute);
 app.use('/restaurants', restaurantsRoute);
 app.use('/search', searchRoute);
+app.use('/optimize-stops', optimizeStopsRoute);
 
 app.listen(PORT, () => {
   console.log(`TravelTaste backend running on http://localhost:${PORT}`);
